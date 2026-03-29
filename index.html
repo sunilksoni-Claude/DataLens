@@ -204,23 +204,44 @@ body.dark .usc-left{background:linear-gradient(160deg,#9B0023 0%,#6a0016 55%,#3d
    Mapping Screen
    ========================================================= */
 #mapping-screen{display:none;}
-.mapping-header{text-align:left;margin-bottom:20px;}
-.mapping-header h2{font-size:20px;color:var(--black);margin-bottom:5px;}
-.mapping-header p{font-size:14px;color:var(--text-light);}
-.mapping-table-container{max-height:420px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;margin-bottom:24px;text-align:left;}
+/* Make mapping screen fill viewport with no outer scroll */
+#mapping-screen.screen-wrapper{align-items:stretch;padding:0;overflow:hidden;height:100vh;}
+#mapping-screen .center-box{max-width:720px;margin:auto;display:flex;flex-direction:column;height:100vh;max-height:100vh;border-radius:0;box-shadow:none;padding:0;overflow:hidden;}
+/* Brand bar */
+.mapping-brand-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0;}
+.mbb-left{display:flex;align-items:center;gap:10px;}
+.mbb-icon{width:34px;height:34px;background:linear-gradient(135deg,#C8102E,#9B0023);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0;box-shadow:0 4px 10px rgba(200,16,46,.3);}
+.mbb-title{font-size:20px;font-weight:800;color:var(--black);letter-spacing:-0.5px;}
+.mbb-title span{color:var(--red);}
+.mbb-cah-logo{height:30px;width:auto;}
+/* Header & legend */
+.mapping-header{text-align:left;padding:16px 28px 12px;flex-shrink:0;border-bottom:1px solid var(--border);}
+.mapping-header h2{font-size:16px;font-weight:700;color:var(--black);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.mapping-legend{display:flex;flex-direction:column;gap:6px;}
+.ml-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid transparent;}
+.ml-pill.measure{background:rgba(241,143,1,.1);color:#b45309;border-color:rgba(241,143,1,.25);}
+.ml-pill.dim{background:rgba(27,153,139,.1);color:var(--teal);border-color:rgba(27,153,139,.25);}
+.ml-pill.filt{background:rgba(200,16,46,.08);color:var(--red);border-color:rgba(200,16,46,.2);}
+.ml-pill.rename{background:rgba(59,130,246,.08);color:#2563eb;border-color:rgba(59,130,246,.2);}
+.mapping-legend-row{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-light);}
+/* Table — grows to fill remaining space */
+.mapping-table-container{flex:1;overflow-y:auto;border-left:none;border-right:none;border-top:none;border-bottom:1px solid var(--border);border-radius:0;margin-bottom:0;text-align:left;}
 .m-table{width:100%;border-collapse:collapse;font-size:13px;}
-.m-table th{position:sticky;top:0;background:var(--s-table-head);padding:12px 16px;font-weight:600;color:var(--text-light);text-transform:uppercase;font-size:11px;border-bottom:2px solid var(--border);z-index:2;}
-.m-table td{padding:11px 16px;border-bottom:1px solid var(--border);color:var(--text);}
-.m-table tr:hover{background:var(--drop-hover);}
-.m-table .sample-data{color:var(--text-light);font-family:monospace;font-size:12px;}
+.m-table thead{position:sticky;top:0;z-index:2;}
+.m-table th{background:var(--s-table-head);padding:11px 18px;font-weight:700;color:var(--text-light);text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+.m-table td{padding:13px 18px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle;}
+.m-table tr:last-child td{border-bottom:none;}
+.m-table tbody tr:hover{background:rgba(200,16,46,.03);}
+.m-col-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cb-wrapper{display:flex;align-items:center;gap:8px;}
-.cb-wrapper input[type=checkbox]{width:17px;height:17px;accent-color:var(--red);cursor:pointer;}
-.cb-wrapper label{font-size:12px;color:var(--text-light);cursor:pointer;}
+.cb-wrapper input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:pointer;}
 .filter-cb-cell{text-align:center;}
 .filter-cb-cell input[type=checkbox]{width:17px;height:17px;accent-color:var(--teal);cursor:pointer;}
-.filter-cb-cell.disabled{opacity:.25;pointer-events:none;}
-.btn-primary{background:var(--red);color:white;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:600;width:100%;transition:.2s;}
-.btn-primary:hover{background:var(--dark-red);box-shadow:0 4px 12px rgba(200,16,46,.3);}
+.filter-cb-cell.disabled{opacity:.2;pointer-events:none;}
+/* Generate button */
+.btn-primary{background:linear-gradient(135deg,#C8102E,#9B0023);color:white;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:700;width:100%;transition:.2s;letter-spacing:.2px;box-shadow:0 4px 14px rgba(200,16,46,.3);}
+.btn-primary:hover{background:linear-gradient(135deg,#a50d25,#7d001b);box-shadow:0 6px 20px rgba(200,16,46,.45);transform:translateY(-1px);}
+.btn-primary:active{transform:translateY(0);}
 
 /* =========================================================
    Dashboard Header
@@ -244,7 +265,7 @@ body.dark .usc-left{background:linear-gradient(160deg,#9B0023 0%,#6a0016 55%,#3d
 /* =========================================================
    Filter Bar
    ========================================================= */
-.filter-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:64px;z-index:90;transition:background .3s;}
+.filter-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:106px;z-index:90;transition:background .3s;}
 .filter-group{display:flex;flex-direction:column;gap:3px;}
 .filter-group label{font-size:10px;font-weight:600;color:var(--text-light);text-transform:uppercase;}
 .filter-group select{padding:6px 26px 6px 8px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;color:var(--text);background:var(--input-bg);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' fill='none' stroke='%2364748b' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center;min-width:130px;cursor:pointer;transition:.2s;}
@@ -341,7 +362,7 @@ body.dark select option{background:#1E2433;color:#C5CEDF;}
 /* =========================================================
    DASHBOARD TABS — DARK BLUE (Enhancement #6)
    ========================================================= */
-.dash-tabs{display:flex;background:var(--tab-bg);padding:0 20px;border-bottom:1px solid rgba(255,255,255,.08);gap:3px;}
+.dash-tabs{display:flex;background:var(--tab-bg);padding:0 20px;border-bottom:1px solid rgba(255,255,255,.08);gap:3px;position:sticky;top:64px;z-index:95;}
 .dash-tab{padding:9px 18px;font-size:12px;font-weight:700;color:rgba(255,255,255,.5);border-radius:7px 7px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent;border-bottom:none;letter-spacing:.2px;display:flex;align-items:center;gap:6px;margin-bottom:-1px;}
 .dash-tab:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);}
 .dash-tab.active{color:#1a2744;background:var(--bg);border-color:rgba(255,255,255,.15);border-bottom-color:var(--bg);}
@@ -430,6 +451,10 @@ body.dark .ub-canvas-area{background-image:radial-gradient(circle,rgba(255,255,2
 .ub-widget:hover{box-shadow:0 4px 16px rgba(0,0,0,.13),0 2px 6px rgba(0,0,0,.07);}
 .ub-widget.ub-dragging{opacity:.82;box-shadow:0 12px 36px rgba(0,0,0,.22);z-index:1000;transition:none;}
 .ub-widget.ub-resizing{transition:none;}
+.ub-widget.ub-selected{outline:2px solid var(--red);outline-offset:2px;box-shadow:0 0 0 4px rgba(200,16,46,.13),0 4px 16px rgba(0,0,0,.13);}
+.data-field.field-clickable:hover{background:rgba(200,16,46,.12);cursor:pointer;}
+.ub-field-target-hint{font-size:9px;color:var(--red);font-weight:600;padding:2px 6px;border-radius:3px;background:rgba(200,16,46,.1);margin-left:4px;animation:ubPulse .8s ease-in-out infinite alternate;}
+@keyframes ubPulse{from{opacity:.5;}to{opacity:1;}}
 .ub-widget.drop-target-active{border:2px dashed var(--red);background:rgba(200,16,46,.03);}
 .ub-widget.collapsed .ub-widget-body{display:none;}
 
@@ -658,6 +683,17 @@ td.cf-mid{background:rgba(234,179,8,.07)!important;}
 .col-rename-btn{background:none;border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--text-light);cursor:pointer;margin-left:4px;transition:.2s;}
 .col-rename-btn:hover{border-color:var(--blue);color:var(--blue);}
 
+/* Typeahead dropdown (calc modal) */
+.ta-wrap{position:relative;}
+.ta-list{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:7px;box-shadow:var(--shadow-lg);z-index:10010;max-height:180px;overflow-y:auto;display:none;}
+.ta-list.open{display:block;}
+.ta-item{padding:7px 12px;font-size:12px;cursor:pointer;color:var(--text);transition:background .15s;}
+.ta-item:hover,.ta-item.ta-active{background:rgba(124,58,237,.1);color:#7c3aed;}
+.ta-item .ta-badge{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+.ta-item .ta-badge.dim{background:rgba(27,153,139,.15);color:var(--teal);}
+.ta-item .ta-badge.met{background:rgba(241,143,1,.15);color:#b45309;}
+.ta-item .ta-badge.calc{background:rgba(124,58,237,.15);color:#7c3aed;}
+
 /* Tooltip customization popover */
 .ub-tt-popover{position:absolute;top:100%;right:0;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 12px;box-shadow:var(--shadow-lg);z-index:500;min-width:180px;display:none;font-size:11px;color:var(--text);}
 .ub-tt-popover.open{display:block;}
@@ -822,17 +858,38 @@ td.cf-mid{background:rgba(234,179,8,.07)!important;}
 
 <!-- Mapping Screen -->
 <div id="mapping-screen" class="screen-wrapper">
-  <div class="center-box" style="max-width:920px;">
+  <div class="center-box" style="max-width:720px;">
+    <!-- Brand Bar -->
+    <div class="mapping-brand-bar">
+      <div class="mbb-left">
+        <div class="mbb-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+        <div class="mbb-title">Data<span>Lens</span></div>
+      </div>
+      <svg class="mbb-cah-logo" viewBox="0 0 1530 506" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#f04e44" fill-rule="evenodd" d="m449.9 238.7c6.8 12.9 11.5 25.9 13.8 38.9l-4.4 2.8c-6.4-12.1-13.6-23.3-21.4-34.2-50.3 33.8-92.4 72.5-118.6 116.7l-4.8-3.3c9.2-41.6 50.2-86.8 112.3-127.7-5-6.3-10.2-12.1-15.8-18.3-30.5 20.3-56.2 41.4-74.6 62.7l-4.3-3.6c10.6-23.6 34.4-48.1 67.5-70.8-4.8-4.7-9.6-9.3-14.6-13.6-13.3 9.7-25.3 19.6-35.7 29.8l-4.1-4.3c7.2-11.6 17.4-23 30.1-33.9-96.3-81-238.1-129-374.3-150.8l1.1-0.7c164.7 21.3 287.8 67.6 365.6 122.7 5.2-5.9 11.3-11.3 18.3-16.6-70-55-174-99.9-298.3-122.5l1.2-0.7c141 20.8 247.9 65.5 308.4 115.2q10-6.4 21.2-12.1c-51.4-48.2-135-87-248.9-112.8l1.1-0.8c126 24.5 212.8 59.1 255.5 109.8 52-24.9 119.9-40.4 171-49.4l1.3 0.8c-49.9 9.8-114 30.7-165.8 56.9 2.3 3.2 4.4 6.4 6.4 9.8l-3.5 3.3c-2.9-3.3-6-6.6-9.1-9.8-7.2 3.8-14 7.6-20.6 11.6 5.5 5 10.4 9.7 15 14.8 62.9-35.7 154-63.8 254.7-79.1l1.2 0.9c-86.3 15.8-176.7 48.4-246.9 88.8 4.5 5.6 8.4 11.4 11.6 17.1 80.3-43.5 193.1-78.6 308.5-90.1l1.5 0.8c-107.8 14.1-234.4 60.8-325.1 116.8 5.3 6.5 10.1 12.7 14.3 19.2 101.1-62.4 251.4-112.5 411.7-119l1.2 1c-104.9 6.4-277.2 53.5-403.7 133.7zm-59.8-70.4c6.2-4.7 12.8-9 19.9-13.4-5-4.6-10.3-9.1-15.7-13.8q-10.9 7.4-20 14.8c5.5 4.2 10.8 8.1 15.8 12.4zm25.2 23.2c6.1-3.6 12.4-7.6 19-11.2-4.4-5.3-9.1-10.3-14.1-15.5-6.8 4.2-13.3 8.2-19.6 12.6 5.2 4.6 10.1 9.4 14.7 14.1z"/>
+        <path fill="#000" d="m760.9 399.1h25.2v104.6h-25.2zm-0.4-44.4h26v24.6h-26z"/><path fill="#000" d="m1020.1 351.4h25.4v152.3h-25.4z"/><path fill="#000" d="m1073 351.4h12.7v65.1h55.8v-65.1h12.8v152.3h-12.8v-76h-55.8v76h-12.7v-152.3"/><path fill="#000" fill-rule="evenodd" d="m1190.8 455.4c0 38.7 25.4 39.1 30 39.1 6.9 0 16.7-3.4 22.7-8.6l0.6 13.3c-5 2.7-11.9 5.9-24.5 5.9-41.1 0-42.4-43.2-42.4-53.7 0-35.7 13.5-53.7 36.9-53.7 25.8 0 37.1 20.5 37.1 57.7zm46.7-11.1c0-22.5-9.1-35.6-23.3-35.6-16 0-23.4 15-23.4 35.6z"/><path fill="#000" d="m1365.3 351.4h12.4v152.3h-12.4z"/><path fill="#000" d="m1422.5 374.6v24.4h21.4v10.4h-21.4v68.9c0 8.4 1.1 16.4 12.1 16.4 5 0 7.4-1.1 9.3-1.7v10.7c-1.2 0.6-4.5 1.4-12 1.4-18.1 0-21.8-11.8-21.8-23.5v-72.2h-15.8v-10.4h15.8v-20.9z"/><path fill="#000" fill-rule="evenodd" d="m486.8 405.3c7.2-3.3 17-7.7 31.6-7.7 31.4 0 41.7 15.4 41.7 39.4v48.3c0 7.5 0.8 14.4 1.4 18.4h-22.7c-1.3-4-1.5-9-1.5-11.9h-0.4c-3.3 3.8-12.3 13.6-29.1 13.6-18.4 0-31.5-11.1-31.5-30.6 0-28.3 25-35.6 50.5-35.6h9.7v-3.9c0-10.4-5.1-19.8-19.5-19.8-12.7 0-23.9 6-28.7 10.1zm49.6 47.3h-9.2c-12 0-27.4 3.6-27.4 19.6 0 9.6 6.2 16.1 16.1 16.1 13.4 0 20.5-11 20.5-24.4z"/><path fill="#000" fill-rule="evenodd" d="m922 405.3c7.1-3.3 17-7.7 31.6-7.7 31.4 0 41.5 15.4 41.5 39.4v48.3c0 7.5 0.9 14.4 1.6 18.4h-22.7c-1.3-4-1.5-9-1.5-11.9h-0.4c-3.3 3.8-12.3 13.6-29 13.6-18.5 0-31.7-11.1-31.7-30.6 0-28.3 25.2-35.6 50.5-35.6h9.8v-3.9c0-10.4-5.1-19.8-19.6-19.8-12.6 0-23.8 6-28.6 10.1zm49.6 47.3h-9.2c-12 0-27.3 3.6-27.3 19.6 0 9.6 6.2 16.1 15.9 16.1 13.6 0 20.6-11 20.6-24.4 0 0 0-11.3 0-11.3z"/><path fill="#000" d="m585 416.5c0-6.6-0.3-12.6-0.9-17.4h22.8c0.2 6.4 0.7 8.1 0.7 14.5h0.4c2-4.5 6.9-16 26.8-16 1.6 0 2.9 0.3 4.3 0.5v23.4c-1.1-0.2-3.7-0.8-7.2-0.8-10.3 0-21.7 6.4-21.7 25.9v57.1h-25.2z"/><path fill="#000" fill-rule="evenodd" d="m735.3 351.4v134.5c0 7.5 0.2 14 0.9 17.8h-23.7c-0.4-2.9-0.8-8.4-0.8-13.6h-0.6c-1.4 3-8 15.3-27.9 15.3-26.1 0-36.8-24.8-36.8-53.8 0-34.2 12.8-54.1 38.8-54.1 16.9 0 22.9 10.2 24.5 12.3h0.5v-58.4zm-25.2 100.1c0-19.6-8.6-35.4-19.3-35.4-10.6 0-19.3 15.8-19.3 35.4 0 19.6 8.7 35.4 19.3 35.4 10.7 0 19.3-15.8 19.3-35.4z"/><path fill="#000" d="m462.7 500.8c-2.7 1-10.7 5.1-30.8 5.1-43.2 0-65.3-31.6-65.3-73.1 0-41.4 22.1-72.9 64.5-72.9 18.6 0 28.3 4 31.6 5.3l-1.4 23.6c-2.5-1.6-10.2-7.4-26.9-7.4-21.6 0-40.1 14.8-40.1 51.4 0 36.9 18.5 51.5 40.1 51.5 12.6 0 21-3.1 26.8-7.3z"/><path fill="#000" d="m811.8 416.5c0-6.6-0.2-12.6-0.8-17.4h23.7c0.1 3.3 0.7 10.6 0.7 13.2h0.4c2.1-3.2 8.7-14.7 27.4-14.7 21.8 0 31.5 13.9 31.5 34.4v71.7h-25.3v-67.7c0-12.9-7.6-17.8-16.2-17.8-8.3 0-16.2 4.7-16.2 17.8v67.7h-25.2z"/><path fill="#000" d="m1461.1 351.4h12.5v57.3h0.2c2.9-3.7 9.3-11 25.3-11 19.6 0 30.4 16 30.4 30.6v75.4h-12.6v-72.5c0-13.9-8.1-23.3-21.4-23.3-13.3 0-21.9 8.9-21.9 23.3v72.5h-12.5c0 0 0-152.3 0-152.3z"/><path fill="#000" fill-rule="evenodd" d="m1325.3 432.3c0-14.5-5.1-23.6-22.8-23.6-14.1 0-24.1 9.9-25.3 10.9l-1.9-12.6c6-3.7 14.6-9.3 28.3-9.3 29.2 0 34.2 21.2 34.2 32.3v50.3c0 7.9 0.6 15.7 1.2 23.4h-12l-0.7-12.6h-0.4c-2.7 3.5-8.4 14-28.4 14-19.6 0-30.7-12.2-30.7-30.8 0-26.7 22.7-33.6 49.6-33.6h8.9c0 0 0-8.4 0-8.4zm-9.9 18.7c-22 0-35.5 6.6-35.5 23 0 10.4 6.6 20.1 20.4 20.1 5.6 0 25-2.2 25-30.8v-12.3c0 0-9.9 0-9.9 0z"/>
+      </svg>
+    </div>
+    <!-- Header -->
     <div class="mapping-header">
-      <h2><i class="fas fa-list-check" style="color:var(--red)"></i> Verify Data Types &amp; Filters</h2>
-      <p><strong>Metric?</strong> — check for numeric columns you want to sum or average.<br>
-      <strong>Use as Filter?</strong> — check for dimension columns you want as dashboard filter dropdowns.<br>
-      <strong>Rename?</strong> — click the <i class="fas fa-pencil" style="color:var(--blue)"></i> icon next to a column name to rename it.</p>
+      <h2><i class="fas fa-sliders" style="color:var(--red)"></i> Configure Your Data Fields</h2>
+      <div class="mapping-legend">
+        <div class="mapping-legend-row">
+          <span class="ml-pill measure"><i class="fas fa-hashtag"></i> Measure</span><span>Numeric Field</span>
+          <span class="ml-pill dim" style="margin-left:16px"><i class="fas fa-tag"></i> Dimension</span><span>Text Field</span>
+        </div>
+        <div class="mapping-legend-row">
+          <span class="ml-pill filt"><i class="fas fa-filter"></i> Filter</span><span>Filter Column</span>
+          <span class="ml-pill rename" style="margin-left:16px"><i class="fas fa-pencil"></i> Rename</span><span>Rename Field</span>
+        </div>
+      </div>
     </div>
     <div class="mapping-table-container">
       <table class="m-table" id="mapping-table-body"></table>
     </div>
-    <button class="btn-primary" onclick="generateDashboard()"><i class="fas fa-wand-magic-sparkles"></i> Generate Full Dashboard</button>
+    <div style="padding:16px 28px;flex-shrink:0;background:var(--white);">
+      <button class="btn-primary" onclick="generateDashboard()"><i class="fas fa-wand-magic-sparkles"></i> Generate Full Dashboard</button>
+    </div>
   </div>
 </div>
 
@@ -912,58 +969,58 @@ td.cf-mid{background:rgba(234,179,8,.07)!important;}
           <div class="comp-group" id="cg-kpi">
           <div class="comp-section-label" onclick="ubToggleCompGroup('cg-kpi')"><i class="fas fa-gauge-high" style="color:var(--red)"></i> KPIs & Metrics<i class="fas fa-chevron-down cs-arrow"></i></div>
           <div class="comp-grid">
-            <div class="comp-item" draggable="true" data-type="kpi" data-label="KPI" ondragstart="ubCompDragStart(event)"><i class="fas fa-gauge-high" style="color:#ef4444"></i>KPI</div>
-            <div class="comp-item" draggable="true" data-type="kpi_trend" data-label="Trend KPI" ondragstart="ubCompDragStart(event)"><i class="fas fa-arrow-trend-up" style="color:#f97316"></i>Trend KPI</div>
-            <div class="comp-item" draggable="true" data-type="kpi_delta" data-label="Delta KPI" ondragstart="ubCompDragStart(event)"><i class="fas fa-up-down" style="color:#eab308"></i>Delta KPI</div>
-            <div class="comp-item" draggable="true" data-type="gauge" data-label="Gauge" ondragstart="ubCompDragStart(event)"><i class="fas fa-gauge" style="color:#a78bfa"></i>Gauge</div>
-            <div class="comp-item" draggable="true" data-type="bullet" data-label="Bullet" ondragstart="ubCompDragStart(event)"><i class="fas fa-bars-progress" style="color:#34d399"></i>Bullet</div>
-            <div class="comp-item" draggable="true" data-type="spark" data-label="Sparkline" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-line" style="color:#60a5fa"></i>Sparkline</div>
+            <div class="comp-item" draggable="true" data-type="kpi" data-label="KPI" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-gauge-high" style="color:#ef4444"></i>KPI</div>
+            <div class="comp-item" draggable="true" data-type="kpi_trend" data-label="Trend KPI" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-arrow-trend-up" style="color:#f97316"></i>Trend KPI</div>
+            <div class="comp-item" draggable="true" data-type="kpi_delta" data-label="Delta KPI" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-up-down" style="color:#eab308"></i>Delta KPI</div>
+            <div class="comp-item" draggable="true" data-type="gauge" data-label="Gauge" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-gauge" style="color:#a78bfa"></i>Gauge</div>
+            <div class="comp-item" draggable="true" data-type="bullet" data-label="Bullet" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-bars-progress" style="color:#34d399"></i>Bullet</div>
+            <div class="comp-item" draggable="true" data-type="spark" data-label="Sparkline" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-line" style="color:#60a5fa"></i>Sparkline</div>
           </div></div>
           <div class="comp-group" id="cg-basic">
           <div class="comp-section-label" onclick="ubToggleCompGroup('cg-basic')"><i class="fas fa-chart-bar" style="color:var(--blue)"></i> Basic Charts<i class="fas fa-chevron-down cs-arrow"></i></div>
           <div class="comp-grid">
-            <div class="comp-item" draggable="true" data-type="bar" data-label="Bar" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-column" style="color:#3b82f6"></i>Bar</div>
-            <div class="comp-item" draggable="true" data-type="hbar" data-label="Horiz Bar" ondragstart="ubCompDragStart(event)"><i class="fas fa-bars-staggered" style="color:#14b8a6"></i>H.Bar</div>
-            <div class="comp-item" draggable="true" data-type="line" data-label="Line" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-line" style="color:#f97316"></i>Line</div>
-            <div class="comp-item" draggable="true" data-type="area" data-label="Area" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-area" style="color:#a855f7"></i>Area</div>
-            <div class="comp-item" draggable="true" data-type="pie" data-label="Pie" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-pie" style="color:#ef4444"></i>Pie</div>
-            <div class="comp-item" draggable="true" data-type="donut" data-label="Donut" ondragstart="ubCompDragStart(event)"><i class="fas fa-circle-notch" style="color:#6366f1"></i>Donut</div>
-            <div class="comp-item" draggable="true" data-type="scatter" data-label="Scatter" ondragstart="ubCompDragStart(event)"><i class="fas fa-braille" style="color:#22c55e"></i>Scatter</div>
-            <div class="comp-item" draggable="true" data-type="stacked_bar" data-label="Stacked Bar" ondragstart="ubCompDragStart(event)"><i class="fas fa-layer-group" style="color:#0ea5e9"></i>Stacked</div>
-            <div class="comp-item" draggable="true" data-type="combo" data-label="Combo" ondragstart="ubCompDragStart(event)"><i class="fas fa-chart-mixed" style="color:#f59e0b"></i>Combo</div>
+            <div class="comp-item" draggable="true" data-type="bar" data-label="Bar" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-column" style="color:#3b82f6"></i>Bar</div>
+            <div class="comp-item" draggable="true" data-type="hbar" data-label="Horiz Bar" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-bars-staggered" style="color:#14b8a6"></i>H.Bar</div>
+            <div class="comp-item" draggable="true" data-type="line" data-label="Line" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-line" style="color:#f97316"></i>Line</div>
+            <div class="comp-item" draggable="true" data-type="area" data-label="Area" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-area" style="color:#a855f7"></i>Area</div>
+            <div class="comp-item" draggable="true" data-type="pie" data-label="Pie" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-pie" style="color:#ef4444"></i>Pie</div>
+            <div class="comp-item" draggable="true" data-type="donut" data-label="Donut" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-circle-notch" style="color:#6366f1"></i>Donut</div>
+            <div class="comp-item" draggable="true" data-type="scatter" data-label="Scatter" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-braille" style="color:#22c55e"></i>Scatter</div>
+            <div class="comp-item" draggable="true" data-type="stacked_bar" data-label="Stacked Bar" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-layer-group" style="color:#0ea5e9"></i>Stacked</div>
+            <div class="comp-item" draggable="true" data-type="combo" data-label="Combo" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-chart-mixed" style="color:#f59e0b"></i>Combo</div>
           </div></div>
           <div class="comp-group" id="cg-advanced">
           <div class="comp-section-label" onclick="ubToggleCompGroup('cg-advanced')"><i class="fas fa-star" style="color:var(--orange)"></i> Advanced Charts<i class="fas fa-chevron-down cs-arrow"></i></div>
           <div class="comp-grid">
-            <div class="comp-item" draggable="true" data-type="treemap" data-label="Treemap" ondragstart="ubCompDragStart(event)"><i class="fas fa-table-cells-large" style="color:#10b981"></i>Treemap</div>
-            <div class="comp-item" draggable="true" data-type="radar" data-label="Radar" ondragstart="ubCompDragStart(event)"><i class="fas fa-spider" style="color:#8b5cf6"></i>Radar</div>
-            <div class="comp-item" draggable="true" data-type="waterfall" data-label="Waterfall" ondragstart="ubCompDragStart(event)"><i class="fas fa-water" style="color:#06b6d4"></i>Waterfall</div>
-            <div class="comp-item" draggable="true" data-type="funnel" data-label="Funnel" ondragstart="ubCompDragStart(event)"><i class="fas fa-filter" style="color:#f43f5e"></i>Funnel</div>
-            <div class="comp-item" draggable="true" data-type="pareto" data-label="Pareto" ondragstart="ubCompDragStart(event)"><i class="fas fa-ranking-star" style="color:#d97706"></i>Pareto</div>
-            <div class="comp-item" draggable="true" data-type="heatmap" data-label="Heatmap" ondragstart="ubCompDragStart(event)"><i class="fas fa-border-all" style="color:#ec4899"></i>Heatmap</div>
+            <div class="comp-item" draggable="true" data-type="treemap" data-label="Treemap" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-table-cells-large" style="color:#10b981"></i>Treemap</div>
+            <div class="comp-item" draggable="true" data-type="radar" data-label="Radar" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-spider" style="color:#8b5cf6"></i>Radar</div>
+            <div class="comp-item" draggable="true" data-type="waterfall" data-label="Waterfall" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-water" style="color:#06b6d4"></i>Waterfall</div>
+            <div class="comp-item" draggable="true" data-type="funnel" data-label="Funnel" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-filter" style="color:#f43f5e"></i>Funnel</div>
+            <div class="comp-item" draggable="true" data-type="pareto" data-label="Pareto" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-ranking-star" style="color:#d97706"></i>Pareto</div>
+            <div class="comp-item" draggable="true" data-type="heatmap" data-label="Heatmap" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-border-all" style="color:#ec4899"></i>Heatmap</div>
           </div></div>
           <div class="comp-group" id="cg-filters">
           <div class="comp-section-label" onclick="ubToggleCompGroup('cg-filters')"><i class="fas fa-sliders" style="color:var(--teal)"></i> Filters & Controls<i class="fas fa-chevron-down cs-arrow"></i></div>
           <div class="comp-grid">
-            <div class="comp-item" draggable="true" data-type="filter" data-label="Dropdown Filter" ondragstart="ubCompDragStart(event)"><i class="fas fa-filter" style="color:#14b8a6"></i>Dropdown</div>
-            <div class="comp-item" draggable="true" data-type="filter_range" data-label="Range Filter" ondragstart="ubCompDragStart(event)"><i class="fas fa-sliders" style="color:#3b82f6"></i>Range</div>
-            <div class="comp-item" draggable="true" data-type="filter_search" data-label="Search Filter" ondragstart="ubCompDragStart(event)"><i class="fas fa-magnifying-glass" style="color:#8b5cf6"></i>Search</div>
-            <div class="comp-item" draggable="true" data-type="filter_check" data-label="Checkbox Filter" ondragstart="ubCompDragStart(event)"><i class="fas fa-check-square" style="color:#22c55e"></i>Checkbox</div>
+            <div class="comp-item" draggable="true" data-type="filter" data-label="Dropdown Filter" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-filter" style="color:#14b8a6"></i>Dropdown</div>
+            <div class="comp-item" draggable="true" data-type="filter_range" data-label="Range Filter" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-sliders" style="color:#3b82f6"></i>Range</div>
+            <div class="comp-item" draggable="true" data-type="filter_search" data-label="Search Filter" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-magnifying-glass" style="color:#8b5cf6"></i>Search</div>
+            <div class="comp-item" draggable="true" data-type="filter_check" data-label="Checkbox Filter" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-check-square" style="color:#22c55e"></i>Checkbox</div>
           </div></div>
           <div class="comp-group" id="cg-layout">
           <div class="comp-section-label" onclick="ubToggleCompGroup('cg-layout')"><i class="fas fa-table" style="color:var(--blue)"></i> Layout & Data<i class="fas fa-chevron-down cs-arrow"></i></div>
           <div class="comp-grid">
-            <div class="comp-item" draggable="true" data-type="datatable" data-label="Table" ondragstart="ubCompDragStart(event)"><i class="fas fa-table" style="color:#3b82f6"></i>Table</div>
-            <div class="comp-item" draggable="true" data-type="text" data-label="Text Label" ondragstart="ubCompDragStart(event)"><i class="fas fa-heading" style="color:#6366f1"></i>Text</div>
-            <div class="comp-item" draggable="true" data-type="divider" data-label="Divider" ondragstart="ubCompDragStart(event)"><i class="fas fa-minus" style="color:#94a3b8"></i>Divider</div>
-            <div class="comp-item" draggable="true" data-type="image" data-label="Image" ondragstart="ubCompDragStart(event)"><i class="fas fa-image" style="color:#f59e0b"></i>Image</div>
-            <div class="comp-item" draggable="true" data-type="annotation" data-label="Annotation Note" ondragstart="ubCompDragStart(event)"><i class="fas fa-sticky-note" style="color:#fb923c"></i>Note</div>
-            <div class="comp-item" draggable="true" data-type="metric_table" data-label="Metrics Table" ondragstart="ubCompDragStart(event)"><i class="fas fa-list-ol" style="color:#0ea5e9"></i>Metrics</div>
-            <div class="comp-item" draggable="true" data-type="tile" data-label="Tile" ondragstart="ubCompDragStart(event)"><i class="fas fa-square-h" style="color:#7c3aed"></i>Tile</div>
-            <div class="comp-item" draggable="true" data-type="param_control" data-label="Parameter Control" ondragstart="ubCompDragStart(event)"><i class="fas fa-sliders" style="color:#0891b2"></i>Param</div>
-            <div class="comp-item" draggable="true" data-type="legend" data-label="Legend" ondragstart="ubCompDragStart(event)"><i class="fas fa-palette" style="color:#db2777"></i>Legend</div>
+            <div class="comp-item" draggable="true" data-type="datatable" data-label="Table" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-table" style="color:#3b82f6"></i>Table</div>
+            <div class="comp-item" draggable="true" data-type="text" data-label="Text Label" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-heading" style="color:#6366f1"></i>Text</div>
+            <div class="comp-item" draggable="true" data-type="divider" data-label="Divider" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-minus" style="color:#94a3b8"></i>Divider</div>
+            <div class="comp-item" draggable="true" data-type="image" data-label="Image" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-image" style="color:#f59e0b"></i>Image</div>
+            <div class="comp-item" draggable="true" data-type="annotation" data-label="Annotation Note" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-sticky-note" style="color:#fb923c"></i>Note</div>
+            <div class="comp-item" draggable="true" data-type="metric_table" data-label="Metrics Table" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-list-ol" style="color:#0ea5e9"></i>Metrics</div>
+            <div class="comp-item" draggable="true" data-type="tile" data-label="Tile" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-square-h" style="color:#7c3aed"></i>Tile</div>
+            <div class="comp-item" draggable="true" data-type="param_control" data-label="Parameter Control" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-sliders" style="color:#0891b2"></i>Param</div>
+            <div class="comp-item" draggable="true" data-type="legend" data-label="Legend" ondragstart="ubCompDragStart(event)" onclick="ubCompClick(event)"><i class="fas fa-palette" style="color:#db2777"></i>Legend</div>
           </div></div>
-          <div class="sidebar-info"><i class="fas fa-info-circle" style="color:var(--red)"></i> Drag to canvas. Then drag <span>dimensions</span> or <span class="met-clr">measures</span> from Data tab onto widget.</div>
+          <div class="sidebar-info"><i class="fas fa-mouse-pointer" style="color:var(--red)"></i> <b>Click</b> a component to add it to the canvas. Then go to <b>Data</b> tab and <b>click</b> a dimension or measure to populate it. Or drag anywhere.</div>
         </div>
         <!-- Data panel — Enhancement #7: Calculated fields -->
         <div class="ub-sidebar-panel hidden" id="ub-panel-data">
@@ -1005,7 +1062,8 @@ td.cf-mid{background:rgba(234,179,8,.07)!important;}
         <div class="ub-canvas-area" id="ub-canvas-area"
           ondragover="ubCanvasDragOver(event)"
           ondragleave="ubCanvasDragLeave(event)"
-          ondrop="ubCanvasDrop(event)">
+          ondrop="ubCanvasDrop(event)"
+          onclick="if(event.target===this||event.target.id==='ub-canvas-area'||event.target.classList.contains('ub-grid')){if(UB_SELECTED_WID){const p=document.getElementById(UB_SELECTED_WID);if(p)p.classList.remove('ub-selected');UB_SELECTED_WID=null;_ubUpdateFieldClickHints();}}">
           <div class="ub-canvas-hint" id="ub-canvas-hint">
             <i class="fas fa-object-group"></i>
             <h3>Your canvas is empty</h3>
@@ -1041,14 +1099,26 @@ td.cf-mid{background:rgba(234,179,8,.07)!important;}
     <p>Create a new field using arithmetic expressions on existing measures.</p>
     <div class="calc-field-row">
       <label>Field Name</label>
-      <input id="calc-name-input" type="text" placeholder="e.g. Profit Margin">
+      <div class="ta-wrap">
+        <input id="calc-name-input" type="text" placeholder="e.g. Profit Margin" autocomplete="off"
+          oninput="calcNameTypeahead(this.value)"
+          onkeydown="calcTAKeydown(event,'calc-name-ta')"
+          onblur="setTimeout(()=>hideTAList('calc-name-ta'),150)">
+        <div class="ta-list" id="calc-name-ta"></div>
+      </div>
     </div>
     <div class="calc-field-row">
-      <label>Expression</label>
-      <textarea id="calc-expr-input" placeholder="e.g. [Revenue] - [Cost]  or  [Profit] / [Revenue] * 100"></textarea>
+      <label>Expression <span style="font-size:10px;color:var(--text-light);font-weight:400;">— type <code style="background:rgba(124,58,237,.1);color:#7c3aed;padding:1px 4px;border-radius:3px;">[</code> to pick a column</span></label>
+      <div class="ta-wrap">
+        <textarea id="calc-expr-input" placeholder="e.g. [Revenue] - [Cost]  or  [Profit] / [Revenue] * 100"
+          oninput="calcExprTypeahead(this)"
+          onkeydown="calcTAKeydown(event,'calc-expr-ta')"
+          onblur="setTimeout(()=>hideTAList('calc-expr-ta'),150)"></textarea>
+        <div class="ta-list" id="calc-expr-ta"></div>
+      </div>
     </div>
     <div class="calc-hint">
-      Use <code>[ColumnName]</code> to reference a measure. Supports <code>+</code> <code>-</code> <code>*</code> <code>/</code> and parentheses.<br>
+      Use <code>[ColumnName]</code> to reference a column. Supports <code>+</code> <code>-</code> <code>*</code> <code>/</code> and parentheses.<br>
       Example: <code>[Revenue] - [Cost]</code> &nbsp;|&nbsp; <code>[Sales] / [Units]</code>
     </div>
     <div class="calc-modal-btns">
@@ -1274,34 +1344,69 @@ function guessIfUsefulFilter(colName,data){
   const uniq=new Set(vals).size;
   return uniq>=2&&uniq<=20;
 }
+function _guessDataType(c,data){
+  const vals=data.map(r=>r[c]).filter(v=>v!=null&&v!=='');
+  if(!vals.length)return'empty';
+  const s=vals.slice(0,20);
+  const numFrac=s.filter(v=>!isNaN(coerceNum(v))).length/s.length;
+  if(numFrac>0.7)return'Number';
+  const dateFrac=s.filter(v=>!isNaN(Date.parse(v))&&String(v).length>4&&typeof v!=='number').length/s.length;
+  if(dateFrac>0.7)return'Date';
+  // Boolean check
+  const boolSet=new Set(vals.map(v=>String(v).toLowerCase()));
+  if(boolSet.size<=2&&[...boolSet].every(v=>['true','false','yes','no','1','0','y','n'].includes(v)))return'Boolean';
+  return'Text';
+}
 function showMappingScreen(){
   if(!RAW.length){alert('No data found.');return;}
   document.getElementById('upload-screen').style.display='none';
   document.getElementById('mapping-screen').style.display='flex';
-  let tableHtml=`<thead><tr><th>Column Name</th><th>Sample Value</th><th style="text-align:center">Metric?</th><th style="text-align:center">Use as Filter?</th></tr></thead><tbody>`;
+  const typeIconMap={Number:{icon:'fa-hashtag',bg:'rgba(241,143,1,.12)',color:'#b45309'},Date:{icon:'fa-calendar-days',bg:'rgba(59,130,246,.12)',color:'#2563eb'},Boolean:{icon:'fa-toggle-on',bg:'rgba(139,92,246,.12)',color:'#7c3aed'},Text:{icon:'fa-tag',bg:'rgba(27,153,139,.12)',color:'var(--teal)'}};
+  let tableHtml=`<thead><tr>
+    <th style="width:50%">Column Name</th>
+    <th style="text-align:center">Dimension / Measure</th>
+    <th style="text-align:center">Use as Filter?</th>
+  </tr></thead><tbody>`;
   Object.keys(RAW[0]).forEach(c=>{
-    let sampleRow=RAW.find(r=>r[c]!=null&&r[c]!=='');
-    let sampleVal=sampleRow?String(sampleRow[c]).substring(0,40):'N/A';
     let isMetric=guessIfMetric(c,RAW);
     let isFilter=!isMetric&&guessIfUsefulFilter(c,RAW);
+    const dtype=_guessDataType(c,RAW);
+    const ti=typeIconMap[dtype]||typeIconMap.Text;
     tableHtml+=`<tr data-col="${c}">
-      <td><div style="display:flex;align-items:center;gap:4px;"><strong id="colname-display-${c}">${c}</strong><button class="col-rename-btn" onclick="startColRename('${c}')" title="Rename column"><i class="fas fa-pencil"></i></button></div></td><td class="sample-data">${sampleVal}</td>
-      <td style="text-align:center"><div class="cb-wrapper" style="justify-content:center"><input type="checkbox" class="metric-cb" data-col="${c}" id="cb-${c}" ${isMetric?'checked':''} onchange="onMetricToggle(this)"><label for="cb-${c}" style="font-size:11px">${isMetric?'Fact':'Dim'}</label></div></td>
-      <td class="filter-cb-cell ${isMetric?'disabled':''}" id="fcell-${c}" style="text-align:center"><input type="checkbox" class="filter-cb" data-col="${c}" id="fcb-${c}" ${isFilter?'checked':''} ${isMetric?'disabled':''}></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="m-col-icon" style="background:${ti.bg}"><i class="fas ${ti.icon}" style="font-size:11px;color:${ti.color}"></i></div>
+          <strong id="colname-display-${c}" style="font-size:13px;">${c}</strong>
+          <button class="col-rename-btn" onclick="startColRename('${c}')" title="Rename column"><i class="fas fa-pencil"></i></button>
+        </div>
+      </td>
+      <td style="text-align:center">
+        <div class="cb-wrapper" style="justify-content:center;gap:8px;">
+          <input type="checkbox" class="metric-cb" data-col="${c}" id="cb-${c}" ${isMetric?'checked':''} onchange="onMetricToggle(this)">
+          <label for="cb-${c}" id="lbl-${c}" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;cursor:pointer;background:${isMetric?'rgba(241,143,1,.15)':'rgba(27,153,139,.15)'};color:${isMetric?'#b45309':'var(--teal)'}">${isMetric?'Measure':'Dimension'}</label>
+        </div>
+      </td>
+      <td class="filter-cb-cell ${isMetric?'disabled':''}" id="fcell-${c}" style="text-align:center">
+        <input type="checkbox" class="filter-cb" data-col="${c}" id="fcb-${c}" ${isFilter?'checked':''} ${isMetric?'disabled':''}>
+      </td>
     </tr>`;
   });
   document.getElementById('mapping-table-body').innerHTML=tableHtml+'</tbody>';
 }
 function onMetricToggle(cb){
   const col=cb.dataset.col;
-  const label=cb.nextElementSibling;
+  const label=document.getElementById('lbl-'+col);
   const fcell=document.getElementById('fcell-'+col);
   const fcb=document.getElementById('fcb-'+col);
-  if(cb.checked){label.textContent='Fact';fcell.classList.add('disabled');fcb.checked=false;fcb.disabled=true;}
-  else{label.textContent='Dim';fcell.classList.remove('disabled');fcb.disabled=false;}
+  if(cb.checked){
+    if(label){label.textContent='Measure';label.style.background='rgba(241,143,1,.15)';label.style.color='#b45309';}
+    fcell.classList.add('disabled');fcb.checked=false;fcb.disabled=true;
+  } else {
+    if(label){label.textContent='Dimension';label.style.background='rgba(27,153,139,.15)';label.style.color='var(--teal)';}
+    fcell.classList.remove('disabled');fcb.disabled=false;
+  }
 }
 function generateDashboard(){
-  applyColRenames();
   COL_TYPES={};FILTER_COLS=new Set();
   document.querySelectorAll('.metric-cb').forEach(cb=>{
     let col=cb.dataset.col;
@@ -1316,6 +1421,7 @@ function generateDashboard(){
     }
   });
   document.querySelectorAll('.filter-cb:not(:disabled)').forEach(cb=>{if(cb.checked)FILTER_COLS.add(cb.dataset.col);});
+  applyColRenames(); // apply after COL_TYPES/FILTER_COLS are built so renamed keys propagate correctly
   FILTERED=[...RAW];computeStats();
   document.getElementById('mapping-screen').style.display='none';
   document.getElementById('dashboard-screen').style.display='block';
@@ -1394,7 +1500,13 @@ function calcStats(values){
   const median=n%2?s[Math.floor(n/2)]:(s[n/2-1]+s[n/2])/2;
   const stdDev=Math.sqrt(s.reduce((a,v)=>a+(v-mean)**2,0)/n);
   const q1=s[Math.floor(n*.25)],q3=s[Math.floor(n*.75)];
-  return{count:n,sum,mean,median,stdDev,min:s[0],max:s[n-1],q1,q3};
+  // Pearson's second skewness coefficient
+  const skewness=stdDev?+(3*(mean-median)/stdDev).toFixed(2):0;
+  // IQR outlier count
+  const iqr=q3-q1;
+  const loFence=q1-1.5*iqr,hiFence=q3+1.5*iqr;
+  const outliers=s.filter(v=>v<loFence||v>hiFence).length;
+  return{count:n,sum,mean,median,stdDev,min:s[0],max:s[n-1],q1,q3,skewness,outliers};
 }
 function computeStats(){
   ALL_STATS={};
@@ -1457,6 +1569,70 @@ function showCalcModal(editName){
   modal.classList.add('active');
 }
 function hideCalcModal(){document.getElementById('calc-modal').classList.remove('active');}
+
+/* =========================================================
+   CALCULATED FIELD — TYPEAHEAD (v1.23)
+   ========================================================= */
+function _allFieldNames(){
+  return[
+    ...Object.keys(COL_TYPES).map(k=>({name:k,badge:COL_TYPES[k]==='numeric'?'met':'dim'})),
+    ...Object.keys(CALC_FIELDS).map(k=>({name:k,badge:'calc'}))
+  ];
+}
+function hideTAList(id){const el=document.getElementById(id);if(el)el.classList.remove('open');}
+function showTAItems(listId,items,onSelect){
+  const el=document.getElementById(listId);if(!el)return;
+  if(!items.length){el.classList.remove('open');return;}
+  el._taOnSelect=onSelect;el._taItems=items;
+  el.innerHTML=items.map((it,i)=>`<div class="ta-item" data-idx="${i}">${it.name}<span class="ta-badge ${it.badge}">${it.badge}</span></div>`).join('');
+  el.querySelectorAll('.ta-item').forEach((div,i)=>{
+    div.addEventListener('mousedown',e=>{e.preventDefault();onSelect(items[i].name);});
+  });
+  el.classList.add('open');
+}
+function calcNameTypeahead(val){
+  const calcs=Object.keys(CALC_FIELDS);
+  const q=val.toLowerCase();
+  const matches=_allFieldNames().filter(f=>f.badge==='calc'&&f.name.toLowerCase().includes(q)&&f.name!==val);
+  showTAItems('calc-name-ta',matches,name=>{
+    document.getElementById('calc-name-input').value=name;
+    hideTAList('calc-name-ta');
+    // also prefill expression if it's an existing calc field
+    if(CALC_FIELDS[name])document.getElementById('calc-expr-input').value=CALC_FIELDS[name].expr;
+  });
+}
+function calcExprTypeahead(ta){
+  const val=ta.value;
+  const pos=ta.selectionStart;
+  // Find the last '[' before cursor without a matching ']'
+  const before=val.substring(0,pos);
+  const bracketIdx=before.lastIndexOf('[');
+  if(bracketIdx===-1){hideTAList('calc-expr-ta');return;}
+  const afterBracket=before.substring(bracketIdx+1);
+  if(afterBracket.includes(']')){hideTAList('calc-expr-ta');return;}
+  const q=afterBracket.toLowerCase();
+  const matches=_allFieldNames().filter(f=>f.name.toLowerCase().includes(q));
+  showTAItems('calc-expr-ta',matches,name=>{
+    const inp=document.getElementById('calc-expr-input');
+    const v=inp.value;const p=inp.selectionStart;
+    const bIdx=v.lastIndexOf('[',p-1);
+    inp.value=v.substring(0,bIdx)+'['+name+']'+v.substring(p);
+    inp.selectionStart=inp.selectionEnd=bIdx+name.length+2;
+    hideTAList('calc-expr-ta');
+    inp.focus();
+  });
+}
+let _taActiveIdx=-1;
+function calcTAKeydown(e,listId){
+  const list=document.getElementById(listId);if(!list||!list.classList.contains('open'))return;
+  const items=list.querySelectorAll('.ta-item');if(!items.length)return;
+  if(e.key==='ArrowDown'){e.preventDefault();_taActiveIdx=Math.min(_taActiveIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();_taActiveIdx=Math.max(_taActiveIdx-1,0);}
+  else if(e.key==='Enter'&&_taActiveIdx>=0){e.preventDefault();const lel=document.getElementById(listId);if(lel&&lel._taOnSelect&&lel._taItems[_taActiveIdx])lel._taOnSelect(lel._taItems[_taActiveIdx].name);_taActiveIdx=-1;return;}
+  else if(e.key==='Escape'){hideTAList(listId);_taActiveIdx=-1;return;}
+  items.forEach((it,i)=>it.classList.toggle('ta-active',i===_taActiveIdx));
+}
+
 function saveCalcField(){
   const name=document.getElementById('calc-name-input').value.trim();
   const expr=document.getElementById('calc-expr-input').value.trim();
@@ -1543,12 +1719,28 @@ function buildDataProfile(){
     let statsHtml='';
     if(type==='numeric'&&ALL_STATS[c]){
       const st=ALL_STATS[c];
+      const skewLabel=st.skewness>0.5?'▶ Right-skewed':st.skewness<-0.5?'◀ Left-skewed':'≈ Symmetric';
+      const skewColor=Math.abs(st.skewness)>1?'#dc2626':Math.abs(st.skewness)>0.5?'#b45309':'#15803d';
+      // mini distribution spark (5 buckets)
+      const buckets=5;const bMin=st.min,bMax=st.max,bRange=bMax-bMin||1;
+      const bucketCounts=new Array(buckets).fill(0);
+      vals.forEach(v=>{const bi=Math.min(buckets-1,Math.floor(((+v-bMin)/bRange)*buckets));bucketCounts[bi]++;});
+      const bMax2=Math.max(...bucketCounts)||1;
+      const sparkBars=bucketCounts.map(b=>`<div style="flex:1;background:var(--red);opacity:.7;border-radius:2px 2px 0 0;height:${Math.round((b/bMax2)*28)+2}px;min-height:2px;"></div>`).join('');
       statsHtml=`<div class="profile-stat-row"><span class="profile-stat-label">Min / Max</span><span class="profile-stat-val">${fmt(st.min,c)} / ${fmt(st.max,c)}</span></div>
         <div class="profile-stat-row"><span class="profile-stat-label">Mean / Median</span><span class="profile-stat-val">${fmt(st.mean,c)} / ${fmt(st.median,c)}</span></div>
-        <div class="profile-stat-row"><span class="profile-stat-label">Std Dev</span><span class="profile-stat-val">${fmt(st.stdDev,c)}</span></div>`;
+        <div class="profile-stat-row"><span class="profile-stat-label">Std Dev / Q1–Q3</span><span class="profile-stat-val">${fmt(st.stdDev,c)}</span></div>
+        <div class="profile-stat-row"><span class="profile-stat-label">Skewness</span><span class="profile-stat-val" style="color:${skewColor};font-size:10px;">${st.skewness} ${skewLabel}</span></div>
+        <div class="profile-stat-row"><span class="profile-stat-label">Outliers (IQR)</span><span class="profile-stat-val" style="color:${st.outliers>0?'#dc2626':'#15803d'}">${st.outliers}</span></div>
+        <div style="display:flex;align-items:flex-end;gap:2px;height:32px;margin-top:6px;" title="Distribution (5 buckets)">${sparkBars}</div>`;
     } else {
-      const topVals=[...new Set(vals)].slice(0,4);
+      // compute mode (most frequent)
+      const freq={};vals.forEach(v=>{const k=String(v);freq[k]=(freq[k]||0)+1;});
+      const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
+      const modeVal=sorted[0]?sorted[0][0]:'—';
+      const topVals=sorted.slice(0,4).map(e=>e[0]);
       statsHtml=`<div class="profile-stat-row"><span class="profile-stat-label">Unique values</span><span class="profile-stat-val">${uniq.toLocaleString()}</span></div>
+        <div class="profile-stat-row"><span class="profile-stat-label">Mode (most frequent)</span><span class="profile-stat-val" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${modeVal}">${String(modeVal).substring(0,18)}</span></div>
         <div class="profile-top-vals">${topVals.map(v=>`<span class="profile-top-chip">${String(v).substring(0,20)}</span>`).join('')}${uniq>4?`<span class="profile-top-chip">+${uniq-4}</span>`:''}</div>`;
     }
     html+=`<div class="profile-card">
@@ -1706,7 +1898,7 @@ function buildMegaCharts(){
       drawPie(d2,n1,getDefaultAgg(n1),6);registerConfig(id2,()=>drawPie(($('cust-dim-'+id2)||{value:d2}).value,($('cust-met-'+id2)||{value:n1}).value,($('cust-agg-'+id2)||{value:'sum'}).value,($('cust-top-'+id2)||{value:6}).value));}catch(e){}
     try{const id3=addChartBox(grid1,`3. Polar: ${short(d1)}`,'Equal-angle varying radius','fa-bullseye',{dim:d1,topN:5});
       const drawPolar=(dim,topN)=>{const pData=countBy(FILTERED,dim,+topN);if(CHARTS[id3])try{CHARTS[id3].destroy();}catch(e){}
-        CHARTS[id3]=new Chart($(id3),{type:'polarArea',data:{labels:pData.map(a=>a[0]),datasets:[{data:pData.map(a=>a[1]),backgroundColor:PAL.map(c=>c+'B3')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:darkMode?'#C5CEDF':'#334155'}}}}});};
+        CHARTS[id3]=new Chart($(id3),{type:'polarArea',data:{labels:pData.map(a=>a[0]),datasets:[{data:pData.map(a=>a[1]),backgroundColor:PAL.map(c=>c+'B3')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:darkMode?'#C5CEDF':'#334155'}}},onClick:(evt,items)=>{if(items.length){setDrillFilter(dim,pData[items[0].index][0]);}}}});};
       drawPolar(d1,5);registerConfig(id3,()=>drawPolar(($('cust-dim-'+id3)||{value:d1}).value,($('cust-top-'+id3)||{value:5}).value));}catch(e){}
     try{const id4=addChartBox(grid1,`4. Treemap: ${short(n1)}`,`Hierarchical by ${short(d1)}`,'fa-table-cells-large',{dim:d1,metric:n1,agg:getDefaultAgg(n1),topN:12});
       const drawTree=(dim,met,agg,topN)=>{const tData=aggregate(FILTERED,dim,met,agg,+topN).map(a=>({cat:a[0],val:a[1]}));if(CHARTS[id4])try{CHARTS[id4].destroy();}catch(e){}
@@ -1737,8 +1929,8 @@ function buildMegaCharts(){
           const datasets=cat2.map((c2,i)=>({label:c2,data:cat1.map(c1=>FILTERED.filter(r=>r[dim1]==c1&&r[dim2]==c2).reduce((s,r)=>s+(coerceNum(r[met])||0),0)),backgroundColor:PAL[i%PAL.length]}));
           if(CHARTS[id8])try{CHARTS[id8].destroy();}catch(e){}
           if(CHARTS[id11])try{CHARTS[id11].destroy();}catch(e){}
-          CHARTS[id8]=new Chart($(id8),{type:'bar',data:{labels:cat1,datasets},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true}},plugins:{tooltip:{callbacks:{label:c=>fmt(c.raw,met)}}}}});
-          CHARTS[id11]=new Chart($(id11),{type:'bar',data:{labels:cat1,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>fmt(c.raw,met)}}}}});
+          CHARTS[id8]=new Chart($(id8),{type:'bar',data:{labels:cat1,datasets},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true}},plugins:{tooltip:{callbacks:{label:c=>fmt(c.raw,met)}}},onClick:(evt,items)=>{if(items.length){setDrillFilter(dim1,cat1[items[0].index]);}}}});
+          CHARTS[id11]=new Chart($(id11),{type:'bar',data:{labels:cat1,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>fmt(c.raw,met)}}},onClick:(evt,items)=>{if(items.length){setDrillFilter(dim1,cat1[items[0].index]);}}}});
         };
         drawStackGrouped(d1,d2,n1,5);
         registerConfig(id8,()=>drawStackGrouped(($('cust-dim-'+id8)||{value:d1}).value,d2,($('cust-met-'+id8)||{value:n1}).value,($('cust-top-'+id8)||{value:5}).value));
@@ -1747,12 +1939,12 @@ function buildMegaCharts(){
     try{const id9=addChartBox(grid2,'9. Pareto Chart',`80/20 rule on ${short(n1)}`,'fa-chart-line',{dim:d1,metric:n1,topN:10});
       const drawPareto=(dim,met,topN)=>{const pData=aggregate(FILTERED,dim,met,'sum',+topN);const total=pData.reduce((s,a)=>s+a[1],0);let run=0;const cumData=pData.map(a=>{run+=a[1];return(run/total)*100;});
         if(CHARTS[id9])try{CHARTS[id9].destroy();}catch(e){}
-        CHARTS[id9]=new Chart($(id9),{type:'bar',data:{labels:pData.map(a=>a[0]),datasets:[{type:'line',label:'Cum %',data:cumData,borderColor:PAL[2],yAxisID:'y1'},{type:'bar',label:met,data:pData.map(a=>a[1]),backgroundColor:PAL[0],yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y1:{position:'right',max:100}},plugins:{tooltip:{callbacks:{label:c=>c.datasetIndex===0?c.raw.toFixed(1)+'%':fmt(c.raw,met)}}}}});};
+        CHARTS[id9]=new Chart($(id9),{type:'bar',data:{labels:pData.map(a=>a[0]),datasets:[{type:'line',label:'Cum %',data:cumData,borderColor:PAL[2],yAxisID:'y1'},{type:'bar',label:met,data:pData.map(a=>a[1]),backgroundColor:PAL[0],yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y1:{position:'right',max:100}},plugins:{tooltip:{callbacks:{label:c=>c.datasetIndex===0?c.raw.toFixed(1)+'%':fmt(c.raw,met)}}},onClick:(evt,items)=>{if(items.length&&items[0].datasetIndex===1){setDrillFilter(dim,pData[items[0].index][0]);}}}});};
       drawPareto(d1,n1,10);registerConfig(id9,()=>drawPareto(($('cust-dim-'+id9)||{value:d1}).value,($('cust-met-'+id9)||{value:n1}).value,($('cust-top-'+id9)||{value:10}).value));}catch(e){}
     try{const id10=addChartBox(grid2,'10. Funnel Chart',`Stage drop-off`,'fa-filter',{dim:d1,metric:n1,topN:6});
       const drawFunnel=(dim,met,topN)=>{const fData=aggregate(FILTERED,dim,met,'sum',+topN);const mx=fData[0]?fData[0][1]:1;const spacers=fData.map(a=>(mx-a[1])/2);
         if(CHARTS[id10])try{CHARTS[id10].destroy();}catch(e){}
-        CHARTS[id10]=new Chart($(id10),{type:'bar',data:{labels:fData.map(a=>a[0]),datasets:[{data:spacers,backgroundColor:'transparent',borderWidth:0},{data:fData.map(a=>a[1]),backgroundColor:PAL[3],borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,display:false},y:{stacked:true,grid:{display:false}}},plugins:{legend:{display:false},tooltip:{filter:c=>c.datasetIndex===1,callbacks:{label:c=>fmt(c.raw,met)}}}}});};
+        CHARTS[id10]=new Chart($(id10),{type:'bar',data:{labels:fData.map(a=>a[0]),datasets:[{data:spacers,backgroundColor:'transparent',borderWidth:0},{data:fData.map(a=>a[1]),backgroundColor:PAL[3],borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,display:false},y:{stacked:true,grid:{display:false}}},plugins:{legend:{display:false},tooltip:{filter:c=>c.datasetIndex===1,callbacks:{label:c=>fmt(c.raw,met)}}},onClick:(evt,items)=>{if(items.length&&items[0].datasetIndex===1){setDrillFilter(dim,fData[items[0].index][0]);}}}});};
       drawFunnel(d1,n1,6);registerConfig(id10,()=>drawFunnel(($('cust-dim-'+id10)||{value:d1}).value,($('cust-met-'+id10)||{value:n1}).value,($('cust-top-'+id10)||{value:6}).value));}catch(e){}
   }
   if(dates.length>=1&&validNc.length>=1){
@@ -2167,6 +2359,7 @@ let ubDragType=null;
 let ubDragCompType=null;
 let ubDragFieldType=null;
 let ubDragFieldName=null;
+let UB_SELECTED_WID=null;
 
 /* =========================================================
    UNDO / REDO (v1.22)
@@ -2304,13 +2497,15 @@ function ubPopulateDataPanel(){
   const dims=Object.keys(COL_TYPES).filter(c=>COL_TYPES[c]==='categorical'||COL_TYPES[c]==='date');
   const mets=Object.keys(COL_TYPES).filter(c=>COL_TYPES[c]==='numeric');
   const calcs=Object.keys(CALC_FIELDS);
-  dimList.innerHTML=dims.map(d=>`<div class="data-field" draggable="true" data-ftype="dim" data-fname="${d}" ondragstart="ubFieldDragStart(event)"><div class="field-icon dim"><i class="fas fa-tag"></i></div><span class="field-name" title="${d}">${d}</span></div>`).join('');
-  metList.innerHTML=mets.map(m=>`<div class="data-field" draggable="true" data-ftype="met" data-fname="${m}" ondragstart="ubFieldDragStart(event)"><div class="field-icon met"><i class="fas fa-hashtag"></i></div><span class="field-name" title="${m}">${m}</span></div>`).join('');
+  const clickHint=`<div id="ub-field-click-hint" style="display:none;font-size:9px;color:var(--red);background:rgba(200,16,46,.08);border-radius:4px;padding:4px 8px;margin-bottom:6px;text-align:center;"><i class="fas fa-hand-pointer"></i> Click a field to assign to selected widget</div>`;
+  dimList.insertAdjacentHTML('beforebegin',clickHint);
+  dimList.innerHTML=dims.map(d=>`<div class="data-field" draggable="true" data-ftype="dim" data-fname="${d}" ondragstart="ubFieldDragStart(event)" onclick="ubFieldClick(this)"><div class="field-icon dim"><i class="fas fa-tag"></i></div><span class="field-name" title="${d}">${d}</span></div>`).join('');
+  metList.innerHTML=mets.map(m=>`<div class="data-field" draggable="true" data-ftype="met" data-fname="${m}" ondragstart="ubFieldDragStart(event)" onclick="ubFieldClick(this)"><div class="field-icon met"><i class="fas fa-hashtag"></i></div><span class="field-name" title="${m}">${m}</span></div>`).join('');
   if(calcList){
-    calcList.innerHTML=calcs.map(c=>`<div class="data-field" draggable="true" data-ftype="met" data-fname="${c}" ondragstart="ubFieldDragStart(event)">
+    calcList.innerHTML=calcs.map(c=>`<div class="data-field" draggable="true" data-ftype="met" data-fname="${c}" ondragstart="ubFieldDragStart(event)" onclick="ubFieldClick(this)">
       <div class="field-icon calc"><i class="fas fa-calculator"></i></div>
       <span class="field-name" title="${c}">${c}</span>
-      <button onclick="deleteCalcField('${c}')" style="background:none;border:none;color:rgba(255,255,255,.35);font-size:10px;cursor:pointer;padding:0 2px;flex-shrink:0;" title="Delete">✕</button>
+      <button onclick="event.stopPropagation();deleteCalcField('${c}')" style="background:none;border:none;color:rgba(255,255,255,.35);font-size:10px;cursor:pointer;padding:0 2px;flex-shrink:0;" title="Delete">✕</button>
     </div>`).join('');
   }
 }
@@ -2325,6 +2520,12 @@ function ubCompDragStart(ev){
   ev.dataTransfer.setData('text/plain','comp:'+ubDragCompType);
   ev.currentTarget.classList.add('dragging');
   setTimeout(()=>ev.currentTarget.classList.remove('dragging'),0);
+}
+function ubCompClick(ev){
+  if(ev.defaultPrevented)return; // dragstart consumed this, skip
+  const type=ev.currentTarget.dataset.type;
+  const id=ubAddWidget(type);
+  if(id)ubSelectWidget(id);
 }
 function ubFieldDragStart(ev){
   ubDragType='field';
@@ -2491,6 +2692,7 @@ function ubAddWidget(type){
   }
   if(type==='datatable')ubRenderWidget(id);
   if(type==='metric_table')ubRenderWidget(id);
+  return id;
 }
 
 function ubUpdateImage(wid,url){
@@ -2712,6 +2914,61 @@ function ubZoneDrop(ev,wid,ztype){
   else if(ztype==='met2'){w.met2=ubDragFieldName;const zone=document.getElementById(wid+'-met2-zone');if(zone){zone.textContent='# '+ubDragFieldName;zone.classList.add('filled');}}
   ubTryRender(wid);
 }
+/* =========================================================
+   CLICK-TO-ASSIGN: select widget, then click field to populate
+   ========================================================= */
+function ubSelectWidget(wid){
+  // Deselect previous
+  if(UB_SELECTED_WID&&UB_SELECTED_WID!==wid){
+    const prev=document.getElementById(UB_SELECTED_WID);
+    if(prev)prev.classList.remove('ub-selected');
+  }
+  if(UB_SELECTED_WID===wid){
+    // Toggle off
+    const el=document.getElementById(wid);if(el)el.classList.remove('ub-selected');
+    UB_SELECTED_WID=null;
+    _ubUpdateFieldClickHints();
+    return;
+  }
+  UB_SELECTED_WID=wid;
+  const el=document.getElementById(wid);if(el)el.classList.add('ub-selected');
+  _ubUpdateFieldClickHints();
+}
+function _ubUpdateFieldClickHints(){
+  // Add/remove the clickable class and hint label on field pills
+  document.querySelectorAll('.data-field').forEach(f=>{
+    f.classList.toggle('field-clickable',!!UB_SELECTED_WID);
+  });
+  const hint=document.getElementById('ub-field-click-hint');
+  if(hint)hint.style.display=UB_SELECTED_WID?'block':'none';
+}
+function ubFieldClick(el){
+  if(!UB_SELECTED_WID)return;
+  const w=UB_WIDGETS[UB_SELECTED_WID];if(!w)return;
+  const dm=UB_WIDGET_META[w.type];if(!dm)return;
+  const ftype=el.dataset.ftype;
+  const fname=el.dataset.fname;
+  ubSaveHistory();
+  if(ftype==='dim'&&dm.needsDim){
+    w.dim=fname;
+    const zone=document.getElementById(UB_SELECTED_WID+'-dim-zone');
+    if(zone){zone.textContent='📊 '+fname;zone.classList.add('filled');}
+  } else if(ftype==='met'&&dm.needsMet){
+    // Fill met2 first if met already set and met2 is needed
+    if(w.met&&dm.needsMet2&&!w.met2){
+      w.met2=fname;
+      const zone2=document.getElementById(UB_SELECTED_WID+'-met2-zone');
+      if(zone2){zone2.textContent='# '+fname;zone2.classList.add('filled');}
+    } else {
+      w.met=fname;
+      const zone=document.getElementById(UB_SELECTED_WID+'-met-zone');
+      if(zone){zone.textContent='# '+fname;zone.classList.add('filled');}
+    }
+  } else {
+    return; // field type doesn't match what widget needs — do nothing
+  }
+  ubTryRender(UB_SELECTED_WID);
+}
 function ubTryRender(wid){
   const w=UB_WIDGETS[wid];if(!w)return;
   const dm=UB_WIDGET_META[w.type];
@@ -2867,13 +3124,13 @@ function ubRenderChart(wid,data){
     if(w.met){aggData=ubAggBy(data,w.dim,w.met,w.agg,8);}
     else{aggData=countBy(data,w.dim,8);}
     if(!aggData.length)return;
-    UB_CHARTS[wid]=new Chart(canvasEl,{type:'doughnut',data:{labels:aggData.map(a=>a[0]),datasets:[{data:aggData.map(a=>a[1]),backgroundColor:PAL,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:w.type==='donut'?'65%':'0%',plugins:{legend:{position:'right',labels:{color:textCol,font:{size:10}}},tooltip:{callbacks:{label:c=>w.met?fmt(c.raw,w.met):c.raw.toLocaleString()}}}}});
+    UB_CHARTS[wid]=new Chart(canvasEl,{type:'doughnut',data:{labels:aggData.map(a=>a[0]),datasets:[{data:aggData.map(a=>a[1]),backgroundColor:PAL,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:w.type==='donut'?'65%':'0%',plugins:{legend:{position:'right',labels:{color:textCol,font:{size:10}}},tooltip:{callbacks:{label:c=>w.met?fmt(c.raw,w.met):c.raw.toLocaleString()}}},onClick:(evt,items)=>{if(items.length&&w.dim){ubSetCrossFilter(w.dim,aggData[items[0].index][0]);}}}});
     return;
   }
   if(w.type==='treemap'){
     if(!w.dim||!w.met)return;
     const tData=ubAggBy(data,w.dim,w.met,w.agg,12).map(a=>({cat:a[0],val:a[1]}));
-    UB_CHARTS[wid]=new Chart(canvasEl,{type:'treemap',data:{datasets:[{tree:tData,key:'val',groups:['cat'],backgroundColor:c=>PAL[c.dataIndex%PAL.length],labels:{display:true,formatter:c=>c.raw._data.cat}}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+    UB_CHARTS[wid]=new Chart(canvasEl,{type:'treemap',data:{datasets:[{tree:tData,key:'val',groups:['cat'],backgroundColor:c=>PAL[c.dataIndex%PAL.length],labels:{display:true,formatter:c=>c.raw._data.cat}}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},onClick:(evt,items)=>{if(items.length&&w.dim){ubSetCrossFilter(w.dim,tData[items[0].index]?.cat);}}}});
     return;
   }
   if(w.type==='radar'){
@@ -2897,12 +3154,12 @@ function ubRenderChart(wid,data){
     const absVals=vals.map(v=>Math.abs(v));
     const mx=Math.max(...absVals,1);
     const spacers=absVals.map(v=>Math.max(0,(mx-v)/2));
-    UB_CHARTS[wid]=new Chart(canvasEl,{type:'bar',data:{labels,datasets:[{data:spacers,backgroundColor:'transparent',borderWidth:0},{data:absVals,backgroundColor:PAL[3],borderRadius:2}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,display:false},y:{stacked:true,grid:{display:false},ticks:{color:textCol},title:{display:true,text:w.dim||'',color:textCol,font:{size:10}}}},plugins:{legend:{display:false},tooltip:{filter:c=>c.datasetIndex===1,callbacks:{label:c=>fmt(c.raw,w.met)}}}}});
+    UB_CHARTS[wid]=new Chart(canvasEl,{type:'bar',data:{labels,datasets:[{data:spacers,backgroundColor:'transparent',borderWidth:0},{data:absVals,backgroundColor:PAL[3],borderRadius:2}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,display:false},y:{stacked:true,grid:{display:false},ticks:{color:textCol},title:{display:true,text:w.dim||'',color:textCol,font:{size:10}}}},plugins:{legend:{display:false},tooltip:{filter:c=>c.datasetIndex===1,callbacks:{label:c=>fmt(c.raw,w.met)}}},onClick:(evt,items)=>{if(items.length&&items[0].datasetIndex===1&&w.dim){ubSetCrossFilter(w.dim,labels[items[0].index]);}}}});
     return;
   }
   if(w.type==='pareto'){
     const total=vals.reduce((a,b)=>a+b,0);let run=0;const cum=vals.map(v=>{run+=v;return(run/total)*100;});
-    UB_CHARTS[wid]=new Chart(canvasEl,{type:'bar',data:{labels,datasets:[{type:'line',label:'Cum%',data:cum,borderColor:PAL[2],yAxisID:'y1'},{type:'bar',label:w.met,data:vals,backgroundColor:PAL[0],yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{color:textCol},title:{display:true,text:w.dim||'',color:textCol,font:{size:10}}},y:{ticks:{color:textCol},title:{display:true,text:w.met||'',color:textCol,font:{size:10}}},y1:{position:'right',max:100,ticks:{color:textCol},title:{display:true,text:'Cumulative %',color:textCol,font:{size:10}}}},plugins:{tooltip:{callbacks:{label:c=>c.datasetIndex===0?c.raw.toFixed(1)+'%':fmt(c.raw,w.met)}}}}});
+    UB_CHARTS[wid]=new Chart(canvasEl,{type:'bar',data:{labels,datasets:[{type:'line',label:'Cum%',data:cum,borderColor:PAL[2],yAxisID:'y1'},{type:'bar',label:w.met,data:vals,backgroundColor:PAL[0],yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{color:textCol},title:{display:true,text:w.dim||'',color:textCol,font:{size:10}}},y:{ticks:{color:textCol},title:{display:true,text:w.met||'',color:textCol,font:{size:10}}},y1:{position:'right',max:100,ticks:{color:textCol},title:{display:true,text:'Cumulative %',color:textCol,font:{size:10}}}},plugins:{tooltip:{callbacks:{label:c=>c.datasetIndex===0?c.raw.toFixed(1)+'%':fmt(c.raw,w.met)}}},onClick:(evt,items)=>{if(items.length&&items[0].datasetIndex===1&&w.dim){ubSetCrossFilter(w.dim,labels[items[0].index]);}}}});
     return;
   }
   if(w.type==='heatmap'){
@@ -3218,16 +3475,24 @@ function ubAttachWidgetInteraction(wid){
 
   // ---- MOVE ----
   if(header){
+    // Click header (without drag) to select widget for click-to-assign
+    header.addEventListener('click',function(e){
+      if(e.target.closest('button')||e.target.closest('select')||e.target.closest('input'))return;
+      if(el._ubWasDragged){el._ubWasDragged=false;return;}
+      ubSelectWidget(wid);
+    });
     header.addEventListener('mousedown',function(e){
       // Don't drag if clicking a button inside header
       if(e.target.closest('button')||e.target.closest('select'))return;
       e.preventDefault();
+      el._ubWasDragged=false;
       const w=UB_WIDGETS[wid];
       const startX=e.clientX,startY=e.clientY;
       const startLeft=w.x||0,startTop=w.y||0;
       el.classList.add('ub-dragging');
       el.style.zIndex=1000;
       const onMove=function(ev){
+        el._ubWasDragged=true;
         let nx=startLeft+(ev.clientX-startX);
         let ny=startTop+(ev.clientY-startY);
         // Snap to grid
